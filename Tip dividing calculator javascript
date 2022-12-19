@@ -1,0 +1,45 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Total amount of money to divide
+rl.question("Enter the total amount of money to divide: ", (totalAmount) => { 
+
+  // Number of staff members
+  rl.question("Enter the number of staff members: ", (numStaff) => {
+    numStaff = parseInt(numStaff);
+    
+    // Create something to store the number of hours worked by each staff member
+    let hoursWorked = new Array(numStaff);
+    
+    // Number of hours worked by each staff member
+    let i = 0;
+    function getHoursWorked() {
+      rl.question("Enter the number of hours worked by staff member " + (i+1) + ": ", (hours) => {
+        hoursWorked[i] = parseInt(hours);
+        i++;
+        if (i < numStaff) {
+          getHoursWorked();
+        } else {
+        
+          // Calculate the total number of hours worked by all staff members
+          let totalHours = 0;
+          for (let i = 0; i < numStaff; i++) {
+            totalHours += hoursWorked[i];
+          }
+          
+          // Divide the total amount of money over each staff member based on the number of hours worked
+          for (let i = 0; i < numStaff; i++) {
+            let share = (hoursWorked[i] / totalHours) * totalAmount;
+            console.log("Staff member " + (i+1) + " gets a share of $" + share);
+          }
+          rl.close();
+        }
+      });
+    }
+    getHoursWorked();
+  });
+});
