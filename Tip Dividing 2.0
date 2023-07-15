@@ -1,0 +1,24 @@
+// Who has worked today and how many hours
+const staff = [
+  { name: 'Staff 1', hours: 4 },
+  { name: 'Staff 2', hours: 6 },
+  { name: 'Staff 3', hours: 8 },
+  // Add as many staff as you like followig the format above
+];
+
+// Sum up the total number of hours worked by all staff members
+const totalHours = staff.reduce((total, member) => total + member.hours, 0);
+
+// Fill in how many tips have come in today
+const totalTips = 100; // Replace with the actual total tip amount
+
+// Calculate the tip distribution per person per hour
+const tipDistribution = staff.map(member => ({
+  name: member.name,
+  tip: (member.hours / totalHours) * totalTips
+}));
+
+// Show the tip distribution for each person
+tipDistribution.forEach(member => {
+  console.log(`${member.name} will get $${member.tip.toFixed(2)} in tips.`);
+});
